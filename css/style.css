@@ -266,7 +266,10 @@ h1,h2,h3,h4,h5,h6 {
     padding-bottom: 12px;
 }
 
-/* خط زیر عنوان */
+/* ========================= */
+/*        خط اصلی            */
+/* ========================= */
+
 .section-title::before {
     content: "";
     position: absolute;
@@ -275,7 +278,6 @@ h1,h2,h3,h4,h5,h6 {
 
     width: 150px;
     height: 5px;
-
     background: var(--primary);
     border-radius: 2px;
 }
@@ -286,23 +288,10 @@ h1,h2,h3,h4,h5,h6 {
     height: 3px;
 }
 
-/* text-center → همیشه وسط */
-.section-title.text-center::before {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-}
+/* ========================= */
+/*       نقطه متحرک          */
+/* ========================= */
 
-/* موبایل و تبلت → وسط‌چین */
-@media (max-width: 991.98px) {
-    .section-title::before {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-/* نقطه متحرک روی خط */
 .section-title::after {
     content: "";
     position: absolute;
@@ -311,42 +300,58 @@ h1,h2,h3,h4,h5,h6 {
 
     width: 6px;
     height: 5px;
-
     background: #fff;
-    animation: section-title-run 5s infinite linear;
+
+    animation: run-right 5s infinite linear;
 }
 
 /* نسخه کوچک */
 .section-title.section-title-sm::after {
     width: 4px;
     height: 3px;
-    animation: section-title-run-sm 5s infinite linear;
+    animation: run-right-sm 5s infinite linear;
 }
 
-/* وقتی وسط‌چین است */
-.section-title.text-center::after {
-    right: auto;
-    left: 50%;
-    animation: section-title-run-center 5s infinite linear;
-}
+/* ========================= */
+/*        انیمیشن‌ها          */
+/* ========================= */
 
-/* انیمیشن‌ها */
-@keyframes section-title-run {
-    0% { right: 0; }
-    50% { right: 145px; }
+@keyframes run-right {
+    0%   { right: 0; }
+    50%  { right: 145px; } /* 150 - 5 */
     100% { right: 0; }
 }
 
-@keyframes section-title-run-sm {
-    0% { right: 0; }
-    50% { right: 85px; }
+@keyframes run-right-sm {
+    0%   { right: 0; }
+    50%  { right: 85px; } /* 90 - 5 */
     100% { right: 0; }
 }
 
-@keyframes section-title-run-center {
-    0% { transform: translateX(-75px); }
-    50% { transform: translateX(75px); }
-    100% { transform: translateX(-75px); }
+/* ========================= */
+/*   موبایل و تبلت (نهایی)   */
+/* ========================= */
+
+@media (max-width: 991.98px) {
+
+    /* خط اصلی: راست‌چین */
+    .section-title::before {
+        left: auto;
+        right: 0;
+    }
+
+    /* نقطه متحرک: دقیقاً روی همان خط */
+    .section-title::after {
+        left: auto;
+        right: 0;
+        transform: none;
+        animation: run-right 5s infinite linear;
+    }
+
+    /* نسخه کوچک */
+    .section-title.section-title-sm::after {
+        animation: run-right-sm 5s infinite linear;
+    }
 }
 
 
