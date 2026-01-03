@@ -270,11 +270,13 @@ h1,h2,h3,h4,h5,h6 {
 /*        خط اصلی            */
 /* ========================= */
 
+/* پیش‌فرض: راست‌چین */
 .section-title::before {
     content: "";
     position: absolute;
     bottom: 0;
     right: 0;
+    left: auto;
 
     width: 150px;
     height: 5px;
@@ -288,15 +290,24 @@ h1,h2,h3,h4,h5,h6 {
     height: 3px;
 }
 
+/* فقط وقتی text-center دارد → وسط */
+.section-title.text-center::before {
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 /* ========================= */
 /*       نقطه متحرک          */
 /* ========================= */
 
+/* پیش‌فرض: راست‌چین */
 .section-title::after {
     content: "";
     position: absolute;
     bottom: 0;
     right: 0;
+    left: auto;
 
     width: 6px;
     height: 5px;
@@ -312,19 +323,26 @@ h1,h2,h3,h4,h5,h6 {
     animation: run-right-sm 5s infinite linear;
 }
 
+/* فقط وقتی text-center دارد → وسط */
+.section-title.text-center::after {
+    left: auto;
+    right: 0;
+    animation: run-right 5s infinite linear;
+}
+
 /* ========================= */
 /*        انیمیشن‌ها          */
 /* ========================= */
 
 @keyframes run-right {
     0%   { right: 0; }
-    50%  { right: 145px; } /* 150 - 5 */
+    50%  { right: 145px; }
     100% { right: 0; }
 }
 
 @keyframes run-right-sm {
     0%   { right: 0; }
-    50%  { right: 85px; } /* 90 - 5 */
+    50%  { right: 85px; }
     100% { right: 0; }
 }
 
@@ -334,13 +352,16 @@ h1,h2,h3,h4,h5,h6 {
 
 @media (max-width: 991.98px) {
 
-    /* خط اصلی: راست‌چین */
+    /* خط اصلی: کاملاً ثابت */
     .section-title::before {
         left: auto;
         right: 0;
+        margin: 0;
+        transform: none;
+        animation: none; /* 👈 مهم */
     }
 
-    /* نقطه متحرک: دقیقاً روی همان خط */
+    /* نقطه متحرک: روی خط حرکت کند */
     .section-title::after {
         left: auto;
         right: 0;
@@ -353,6 +374,7 @@ h1,h2,h3,h4,h5,h6 {
         animation: run-right-sm 5s infinite linear;
     }
 }
+
 
 
 /*** Service ***/
